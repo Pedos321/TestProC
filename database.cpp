@@ -12,7 +12,7 @@ DataBase::~DataBase()
 
 void DataBase::connectToDataBase()
 {
-    if(!QFile("C:/Users/AlsAr/Desktop/QtProjects/QDataWidgetMapper/" DATABASE_NAME).exists()){
+    if(!QFile("C:/QtProjects/QScrollArea-master/TestProC" DATABASE_NAME).exists()){
         this->restoreDataBase();
     } else {
         this->openDataBase();
@@ -38,7 +38,7 @@ bool DataBase::openDataBase()
 {
     db = QSqlDatabase::addDatabase("QSQLITE");
     db.setHostName(DATABASE_HOSTNAME);
-    db.setDatabaseName("C:/Users/AlsAr/Desktop/QtProjects/QDataWidgetMapper/" DATABASE_NAME);
+    db.setDatabaseName("C:/QtProjects/QScrollArea-master/TestProC" DATABASE_NAME);
     if(db.open()){
         return true;
     } else {
@@ -90,4 +90,9 @@ bool DataBase::inserIntoDeviceTable(const QVariantList &data)
         return true;
     }
     return false;
+}
+
+void DataBase::selectNameFromDB()
+{
+
 }

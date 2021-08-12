@@ -8,6 +8,23 @@ MainApp::MainApp(QWidget *parent) :
     ui(new Ui::MainApp)
 {
     ui->setupUi(this);
+
+    db = new DataBase();
+    db->connectToDataBase();
+
+    for(int i = 0; i < 4; i++){
+           QVariantList data;
+           int random = 5; // Get random integers to be inserted into the database
+           data.append(QDate::currentDate()); // Get the current date to be inserted into the database
+           data.append(QTime::currentTime()); // Get the current time to be inserted into the database
+           // Prepare the received random number to be inserted into the database
+           data.append(random);
+           // Prepare message for insertion into the database
+           data.append("Получено сообщение от " + QString::number(random));
+           // Insert data into the database
+           db->inserIntoDeviceTable(data);
+    }
+
 }
 
 MainApp::~MainApp()
@@ -17,9 +34,6 @@ MainApp::~MainApp()
 
 void MainApp::on_btnAddNew_clicked()
 {
-    QLabel *label = new QLabel("Text");
-    ui->scrollAreaWidgetContents->layout()->addWidget(label);
-
 
     createModel(DEVICE,QStringList() << tr("id")
                 << tr("Имя хоста")
@@ -27,11 +41,17 @@ void MainApp::on_btnAddNew_clicked()
                 << tr("MAC-адрес")
                 << tr("Name"));
 
+
+    qDebug()<<model->columnCount();
     QTableView *view = new QTableView();
+    view->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
     view->setModel(model);
 
-    ui->scrollAreaWidgetContents->layout()->addWidget(view);
 
+    QLabel *label = new QLabel(model->index(0,4).data().toString());
+    ui->scrollAreaWidgetContents->layout()->addWidget(label);
+    ui->scrollAreaWidgetContents->layout()->addWidget(view);
+    ui->scrollAreaWidgetContents->layout()->addWidget(view);
 
 }
 
@@ -42,8 +62,11 @@ void MainApp::createModel(const QString &tableName, const QStringList &headers)
      model->setEditStrategy(QSqlTableModel::OnManualSubmit);
      model->select();
 
-     for(int i = 0, j = 0; i < model->columnCount(); i++, j++){
+
+     for(int i = 0, j = 0; i < model->columnCount(); i++, j++)
+     {
          model->setHeaderData(i,Qt::Horizontal,headers[j]);
+         qDebug()<<headers[j];
      }
 }
 

@@ -37,6 +37,7 @@ private:
     bool restoreDataBase();
     void closeDataBase();
     bool createDeviceTable();
+    void selectNameFromDB();
 };
 
 #endif // DATABASE_H
