@@ -25,6 +25,7 @@ MainApp::MainApp(QWidget *parent) :
            db->inserIntoDeviceTable(data);
     }
 
+
 }
 
 MainApp::~MainApp()
@@ -68,6 +69,7 @@ void MainApp::createModel(const QString &tableName, const QStringList &headers)
          model->setHeaderData(i,Qt::Horizontal,headers[j]);
          qDebug()<<headers[j];
      }
+     listOfModels[0].append(model);
 }
 
 
