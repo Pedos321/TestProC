@@ -17,7 +17,9 @@ MainWindow::MainWindow(QWidget *parent)
 
     qDebug()<<*namesFromDB;
 
-    ProtocolCustomWidget *customWidget = new ProtocolCustomWidget("name");
+
+
+
 }
 
 MainWindow::~MainWindow()

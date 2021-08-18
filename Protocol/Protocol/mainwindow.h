@@ -22,6 +22,7 @@ private:
     Ui::MainWindow         *ui;
     dataBase               *db;
     QVBoxLayout            *mainLayout;
+    QList<ProtocolCustomWidget> *listOf;
 private:
     void init();
 };

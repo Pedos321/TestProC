@@ -20,7 +20,6 @@ public:
     ~MainApp();
 
 private slots:
-    void on_btnAddNew_clicked();
 
 private:
     Ui::MainApp *ui;

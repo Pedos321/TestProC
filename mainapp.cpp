@@ -1,7 +1,12 @@
 #include "mainapp.h"
 #include "ui_mainapp.h"
+#include "mycustomwidget.h"
+
 #include<QTableView>
+#include <QScrollArea>
 #include <QLabel>
+#include <QPushButton>
+#include <QString>
 
 MainApp::MainApp(QWidget *parent) :
     QMainWindow(parent),
@@ -25,6 +30,29 @@ MainApp::MainApp(QWidget *parent) :
            db->inserIntoDeviceTable(data);
     }
 
+    //Создаем скролл чтобы в него вписать виджеты с подпунктами протокола
+    QScrollArea* scroll = new QScrollArea;
+       QVBoxLayout* layout = new QVBoxLayout;
+       //for(int i = 0; i < 100; ++i)
+       //layout -> addWidget(new QPushButton("text"));
+
+       MyCustomWidget* widgetOne = new MyCustomWidget("widgetOne");
+       MyCustomWidget* widgetTwo = new MyCustomWidget("widgetTwo");
+       MyCustomWidget* widgetThree = new MyCustomWidget("widgetThree");
+       layout->addWidget(widgetOne);
+       layout->addWidget(widgetTwo);
+       layout->addWidget(widgetThree);
+
+       QWidget* widget = new QWidget;
+       widget -> setLayout(layout);
+       scroll -> setWidget(widget);
+       scroll -> show();
+
+
+
+
+
+       scroll->resize(500,500);
 
 }
 
@@ -33,51 +61,6 @@ MainApp::~MainApp()
     delete ui;
 }
 
-void MainApp::on_btnAddNew_clicked()
-{
-
-    createModel(DEVICE,QStringList() << tr("id")
-                << tr("Имя хоста")
-                << tr("IP адрес")
-                << tr("MAC-адрес")
-                << tr("Name"));
 
 
-    qDebug()<<model->columnCount();
-    QTableView *view = new QTableView();
-    view->setSizePolicy(QSizePolicy::Preferred, QSizePolicy::Fixed);
-    view->setModel(model);
-
-
-    QLabel *label = new QLabel(model->index(0,4).data().toString());
-    ui->scrollAreaWidgetContents->layout()->addWidget(label);
-    ui->scrollAreaWidgetContents->layout()->addWidget(view);
-    ui->scrollAreaWidgetContents->layout()->addWidget(view);
-
-}
-
-void MainApp::createModel(const QString &tableName, const QStringList &headers)
-{
-     model = new QSqlTableModel(this);
-     model->setTable(tableName);
-     model->setEditStrategy(QSqlTableModel::OnManualSubmit);
-     model->select();
-
-
-     for(int i = 0, j = 0; i < model->columnCount(); i++, j++)
-     {
-         model->setHeaderData(i,Qt::Horizontal,headers[j]);
-         qDebug()<<headers[j];
-     }
-     listOfModels[0].append(model);
-}
-
-
-
-//QTableView *createView(QSqlTableModel &model) Для чего
-//{
-//   QTableView *view = new QTableView;
-//  view->setModel(&model);
-//  return view;
-//}
 

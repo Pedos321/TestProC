@@ -14,9 +14,11 @@ TEMPLATE = app
 
 SOURCES += main.cpp\
         database.cpp \
-        mainapp.cpp
+        mainapp.cpp \
+        mycustomwidget.cpp
 
 HEADERS  += mainapp.h \
-    database.h
+    database.h \
+    mycustomwidget.h
 
 FORMS    += mainapp.ui

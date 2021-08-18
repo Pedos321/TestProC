@@ -1,0 +1,11 @@
+debug/main.o
+debug/alignmentdelegate.o
+debug/checkboxdelegate.o
+debug/checkboxheader.o
+debug/imagedelegate.o
+debug/modelviewdemowidget.o
+debug/moc_modelviewdemowidget.o
+debug/moc_alignmentdelegate.o
+debug/moc_checkboxdelegate.o
+debug/moc_checkboxheader.o
+debug/moc_imagedelegate.o

@@ -1,0 +1,11 @@
+release/main.o
+release/alignmentdelegate.o
+release/checkboxdelegate.o
+release/checkboxheader.o
+release/imagedelegate.o
+release/modelviewdemowidget.o
+release/moc_modelviewdemowidget.o
+release/moc_alignmentdelegate.o
+release/moc_checkboxdelegate.o
+release/moc_checkboxheader.o
+release/moc_imagedelegate.o
